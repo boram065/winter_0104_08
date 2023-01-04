@@ -21,8 +21,10 @@ public class ReceHorseFrame extends JFrame{
 	int[] winnerIndex = new int[horses.length];
 	int index;
 	String[] combostr = {"1번 : 윤환쌤", "2번 : 영철쌤", "3번 : 이해원", "4번 : 조서현", "5번 : 황혜경"};
+	String[] name = {"플레이어1", "플레이어2"};
 	JComboBox<String> combo = new JComboBox<String>(combostr);
-	int betingIndex;
+	JComboBox<String> combo2 = new JComboBox<String>(combostr);
+	int betingIndex; int betingIndex2;
 	
 	public ReceHorseFrame() {
 		JPanel jp = new JPanel(null);
@@ -42,9 +44,14 @@ public class ReceHorseFrame extends JFrame{
 		JButton start = new JButton("게임시작");
 		be.addActionListener(startL);
 		start.addActionListener(startL);
+		JLabel name1 = new JLabel(name[0]);
+		JLabel name2 = new JLabel(name[1]);
 		jpN.add(start);
 		jpN.add(be);
+		jpN.add(name1);
 		jpN.add(combo);
+		jpN.add(name2);
+		jpN.add(combo2);
 		
 		for(int i = 0; i < horses.length; i++) {
 			icon = new ImageIcon("images/말" + (i+1) + ".jpg");
@@ -79,6 +86,7 @@ public class ReceHorseFrame extends JFrame{
 				switch (e.getActionCommand()){
 					case "게임베팅" : 
 						betingIndex = combo.getSelectedIndex();
+						betingIndex2 = combo2.getSelectedIndex();
 						break;
 					case "게임시작" : 
 						for (int i = 0; i < horses.length; i++) {
@@ -110,7 +118,9 @@ public class ReceHorseFrame extends JFrame{
 					if(horseIndex == horses.length-1) {
 						JOptionPane.showMessageDialog(ReceHorseFrame.this, "축하합니다. "+(winnerIndex[0]+1)+"번 말이 우승!!!");
 						if(winnerIndex[0] == betingIndex) {
-							JOptionPane.showMessageDialog(ReceHorseFrame.this, "축하합니다.\n베팅에 성공하셨습니다.");
+							JOptionPane.showMessageDialog(ReceHorseFrame.this, "축하합니다.\n플레이어1 베팅에 성공하셨습니다.");
+						}else if(winnerIndex[0] == betingIndex2){
+							JOptionPane.showMessageDialog(ReceHorseFrame.this, "축하합니다.\n플레이어2 베팅에 성공하셨습니다.");
 						} else {
 							JOptionPane.showMessageDialog(ReceHorseFrame.this, "아쉽습니다.\n베팅에 실패하셨습니다.");
 						}//if
